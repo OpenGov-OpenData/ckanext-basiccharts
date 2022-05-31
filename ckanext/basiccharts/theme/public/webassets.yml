@@ -3,8 +3,8 @@ main-css:
   contents:
     - basiccharts.css
 
-main-js:
-  output: basiccharts/%(version)_basiccharts_js.js
+main-flot:
+  output: basiccharts/%(version)_jquery_flot_js.js
   filters: rjsmin
   contents:
     - vendor/jquery.flot.js
@@ -13,10 +13,32 @@ main-js:
     - vendor/jquery.flot.categories.js
     - vendor/jquery.flot.tooltip.js
     - vendor/jquery.flot.resize.js
-    - vendor/queryStringToJSON.js
+    - vendor/excanvas.js
+  extra:
+    preload:
+      - base/ckan
+      - base/main
+
+backend-ckan-js:
+  output: basiccharts/%(version)_backend_ckan_js.js
+  filters: rjsmin
+  contents:
     - vendor/backend.ckan.js
+
+query-string-to-json-js:
+  output: basiccharts/%(version)_query_String_To_JSON.js
+  filters: rjsmin
+  contents:
+    - vendor/queryStringToJSON.js
+
+main-js:
+  output: basiccharts/%(version)_basiccharts_js.js
+  filters: rjsmin
+  contents:
     - basiccharts.js
     - basiccharts_view.js
   extra:
     preload:
-      - base/main
+      - basiccharts/main-flot
+      - basiccharts/query-string-to-json-js
+      - basiccharts/backend-ckan-js

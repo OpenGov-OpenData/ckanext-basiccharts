@@ -22,7 +22,7 @@ class TestBaseChart(object):
         assert self.plugin.CHART_TYPE == 'base', '"CHART_TYPE" should be "base"'
 
     def test_group_by_is_required(self):
-        assert self.plugin.GROUP_BY_IS_REQUIRED == False, '"GROUP_BY_IS_REQUIRED" should be false'
+        assert not self.plugin.GROUP_BY_IS_REQUIRED, '"GROUP_BY_IS_REQUIRED" should be false'
 
     def test_plugin_templates_path_is_added_to_config(self):
         filename = inspect.getfile(inspect.currentframe())
@@ -33,10 +33,10 @@ class TestBaseChart(object):
 
     def test_can_view_only_if_datastore_is_active(self):
         active_datastore_data_dict = {
-            'resource': { 'datastore_active': True }
+            'resource': {'datastore_active': True}
         }
         inactive_datastore_data_dict = {
-            'resource': { 'datastore_active': False }
+            'resource': {'datastore_active': False}
         }
         assert self.plugin.can_view(active_datastore_data_dict)
         assert not self.plugin.can_view(inactive_datastore_data_dict)
@@ -111,7 +111,7 @@ class TestBaseChart(object):
         }
 
         template_variables = \
-          self._setup_template_variables(resource_view=resource_view)
+            self._setup_template_variables(resource_view=resource_view)
 
         assert 'resource_view' in template_variables
         assert template_variables['resource_view'] == resource_view
@@ -246,4 +246,4 @@ class TestPieChart(TestBaseChart):
         assert self.plugin.CHART_TYPE == 'pie', '"CHART_TYPE" should be "pie"'
 
     def test_group_by_is_required(self):
-        assert self.plugin.GROUP_BY_IS_REQUIRED == True, '"GROUP_BY_IS_REQUIRED" should be true'
+        assert self.plugin.GROUP_BY_IS_REQUIRED, '"GROUP_BY_IS_REQUIRED" should be true'

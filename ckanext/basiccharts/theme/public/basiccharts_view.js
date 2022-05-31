@@ -23,7 +23,7 @@ ckan.module("basiccharts_view", function (jQuery) {
         chartType = self.options.chartType,
         resourceView = self.options.resourceView,
         params = setupParams(resourceView, chartType),
-        elementId = "#"+self.el.context.id,
+        elementId = "#"+self.el[0].id,
         resource = {
           id: self.options.resourceId,
           endpoint: endpoint
@@ -51,7 +51,7 @@ ckan.module("basiccharts_view", function (jQuery) {
         if (params.group_by && params.chart_type != "pie") {
           var aGroupBy = a[params.group_by],
               bGroupBy = b[params.group_by],
-              result = aGroupBy.localeCompare(bGroupBy);
+              result = aGroupBy.toString().localeCompare(bGroupBy.toString());
 
           if (result !== 0) {
             return result;

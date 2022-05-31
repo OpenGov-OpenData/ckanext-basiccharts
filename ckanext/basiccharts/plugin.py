@@ -25,9 +25,7 @@ class BaseChart(p.SingletonPlugin):
 
     def update_config(self, config):
         p.toolkit.add_template_directory(config, 'theme/templates')
-
         p.toolkit.add_resource('theme/public', 'basiccharts')
-        # p.toolkit.add_public_directory(config, 'theme/public')
 
     def info(self):
         schema = {
@@ -157,8 +155,8 @@ class BasicGrid(p.SingletonPlugin):
                                                   extra_template_paths])
 
         p.toolkit.add_resource('basicgrid/resources', 'basicgrid')
-        # p.toolkit.add_resource('theme/public', 'basiccharts')
-        # p.toolkit.add_public_directory(config, 'theme/public')
+        p.toolkit.add_resource('theme/public', 'basiccharts')
+        p.toolkit.add_public_directory(config, 'theme/public')
 
     def info(self):
         schema = {
@@ -249,7 +247,7 @@ def convert_to_string(value):
 
 def validate_fields(key, converted_data, errors, context):
     try:
-        resource = {'id': converted_data['resource_id',]}
+        resource = {'id': converted_data['resource_id', ]}
     except KeyError:
         resource = {'id': context['resource'].id}
     value = converted_data.get(key)
