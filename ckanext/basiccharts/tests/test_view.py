@@ -1,18 +1,15 @@
-import os
-import inspect
 import mock
 import pytest
 import ckan.plugins as p
 
-import ckanext.basiccharts
-from ckan.common import config
+from ckanext.basiccharts.plugin import BaseChart
 
 
 class TestBaseChart(object):
 
     @classmethod
     def setup_class(cls):
-        cls.plugin = ckanext.basiccharts.plugin.BaseChart()
+        cls.plugin = BaseChart()
 
     def test_plugin_cant_be_loaded(self):
         with pytest.raises(p.PluginNotFoundException):
@@ -23,13 +20,6 @@ class TestBaseChart(object):
 
     def test_group_by_is_required(self):
         assert not self.plugin.GROUP_BY_IS_REQUIRED, '"GROUP_BY_IS_REQUIRED" should be false'
-
-    def test_plugin_templates_path_is_added_to_config(self):
-        filename = inspect.getfile(inspect.currentframe())
-        path = os.path.dirname(filename)
-        templates_path = os.path.abspath(path + "/../theme/templates")
-
-        assert templates_path in config['extra_template_paths'], templates_path
 
     def test_can_view_only_if_datastore_is_active(self):
         active_datastore_data_dict = {

@@ -1,4 +1,3 @@
-import os
 import json
 import collections
 
@@ -145,17 +144,8 @@ class BasicGrid(p.SingletonPlugin):
                 }
 
     def update_config(self, config):
-        here = os.path.dirname(__file__)
-        rootdir = os.path.dirname(os.path.dirname(here))
-        extra_template_paths = config.get('extra_template_paths', '')
-
-        template_dir = os.path.join(rootdir, 'ckanext', 'basiccharts',
-                                    'basicgrid', 'templates')
-        config['extra_template_paths'] = ','.join([template_dir,
-                                                  extra_template_paths])
-
+        p.toolkit.add_template_directory(config, 'basicgrid/templates')
         p.toolkit.add_resource('basicgrid/resources', 'basicgrid')
-        p.toolkit.add_resource('theme/public', 'basiccharts')
         p.toolkit.add_public_directory(config, 'theme/public')
 
     def info(self):
